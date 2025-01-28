@@ -11,7 +11,7 @@ terraform {
   backend "azurerm" {
     resource_group_name  = "ap-rg"
     storage_account_name = "apstorage12345"
-    container_name       = "calc-container"
+    container_name       = "calc1-container"
     key                  = "terraform.tfstate"
   }
 }
