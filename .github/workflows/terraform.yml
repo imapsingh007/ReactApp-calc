@@ -1,30 +1,25 @@
-name: Deploy Terraform
-
-permissions:
-  id-token: write
+name: Deploy Python App with Terraform
 
 on:
   push:
     branches:
-      - 
+      - main
 
 jobs:
-  deploy:
+  terraform:
+    name: Terraform Infra Provisioning
     runs-on: ubuntu-latest
+
+    env:
+      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+
     steps:
       # Checkout code
       - name: Checkout Code
         uses: actions/checkout@v3
-
-      # Azure Login
-      - name: Azure Login
-        uses: azure/login@v1
-        with:
-          auth-type: "service-principal"  # Correct case: service-principal
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       # Setup Terraform
       - name: Setup Terraform
