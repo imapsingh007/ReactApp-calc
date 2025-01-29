@@ -11,7 +11,7 @@ terraform {
   backend "azurerm" {
     resource_group_name  = "ap-rg"
     storage_account_name = "apstorage12345"
-    container_name       = "calc1-container"
+    container_name       = "calc2-container"
     key                  = "terraform.tfstate"
   }
 }
@@ -23,12 +23,12 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "rg" {
-  name     = "calc-app-rg"
+  name     = "calc1-app-rg"
   location = "Canada Central"
 }
 
 resource "azurerm_app_service_plan" "asp" {
-  name                = "calc-app-service-plan"
+  name                = "calc1-app-service-plan"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   sku {
@@ -38,7 +38,7 @@ resource "azurerm_app_service_plan" "asp" {
 }
 
 resource "azurerm_app_service" "app" {
-  name                = "calc-app-webapp"
+  name                = "calc1-app-webapp"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   app_service_plan_id = azurerm_app_service_plan.asp.id
