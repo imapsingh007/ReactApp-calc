@@ -31,9 +31,8 @@ resource "azurerm_app_service_plan" "asp" {
   name                = "calc1-app-service-plan"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  sku {
-    tier = "Free"
-    size = "F1"
+  os_type             = "Linux"
+sku_name = "B1" # Linux doesn't support F1 (Free Tier)
   }
 }
 
@@ -44,7 +43,6 @@ resource "azurerm_app_service" "app" {
   app_service_plan_id = azurerm_app_service_plan.asp.id
 
   site_config {
-    # No need to define linux_fx_version directly
-    # Terraform will automatically set the version based on the service plan
+    linux_fx_version = null # Only for Linux apps; remove for Windows
   }
 }
