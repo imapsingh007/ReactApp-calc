@@ -34,7 +34,7 @@ resource "azurerm_service_plan" "asp" {
   sku_name = "B1" # Linux does not support F1 (Free Tier)
 }
 
-resource "azurerm_app_service" "app" {
+resource "azurerm_linux_web_app" "app" {
   name                = "calc1-app-webapp"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
