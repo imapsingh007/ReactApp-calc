@@ -18,13 +18,11 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Azure Login
+      # Azure Login using OIDC
       - name: Azure Login
         uses: azure/login@v1
         with:
-          auth-type: "OIDC"
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
